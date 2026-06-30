@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nutriscan AI - Diet Assistant</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-wrapper">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-sidebar">
+                    <span class="logo-circle">🥗</span>
+                    <div class="logo-text-sidebar">
+                        <div class="logo-name">Nutriscan AI</div>
+                        <div class="logo-subtitle">Diet Assistant</div>
+                    </div>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="#" onclick="showPage('dashboard')" class="nav-item active" data-page="dashboard">
+                    <span class="nav-icon">📊</span>
+                    <span class="nav-text">Dashboard</span>
+                </a>
+                <a href="#" onclick="showPage('scanner')" class="nav-item" data-page="scanner">
+                    <span class="nav-icon">📷</span>
+                    <span class="nav-text">Food Scanner</span>
+                </a>
+                <a href="#" onclick="showPage('tools')" class="nav-item" data-page="tools">
+                    <span class="nav-icon">🧮</span>
+                    <span class="nav-text">BMI Calculator</span>
+                </a>
+                <a href="#" onclick="showPage('tools')" class="nav-item" data-page="tools">
+                    <span class="nav-icon">🍽️</span>
+                    <span class="nav-text">Diet Plan</span>
+                </a>
+                <a href="#" onclick="alert('Coming soon!')" class="nav-item">
+                    <span class="nav-icon">💡</span>
+                    <span class="nav-text">Recommendations</span>
+                </a>
+                <a href="#" onclick="showPage('profile')" class="nav-item" data-page="profile">
+                    <span class="nav-icon">👤</span>
+                    <span class="nav-text">My Profile</span>
+                </a>
+                <a href="#" onclick="alert('Admin dashboard coming soon!')" class="nav-item">
+                    <span class="nav-icon">⚙️</span>
+                    <span class="nav-text">Admin Panel</span>
+                </a>
+                <a href="#" onclick="alert('Feature coming soon!')" class="nav-item">
+                    <span class="nav-icon">📋</span>
+                    <span class="nav-text">ER Diagram</span>
+                </a>
+                <a href="#" onclick="alert('Feature coming soon!')" class="nav-item">
+                    <span class="nav-icon">🎯</span>
+                    <span class="nav-text">Use Case Diagram</span>
+                </a>
+                <a href="#" onclick="alert('Feature coming soon!')" class="nav-item">
+                    <span class="nav-icon">📈</span>
+                    <span class="nav-text">DFD Diagram</span>
+                </a>
+                <a href="#" onclick="alert('Feature coming soon!')" class="nav-item">
+                    <span class="nav-icon">📊</span>
+                    <span class="nav-text">Gantt Chart</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="#" onclick="if(confirm('Logout?')) window.location.reload()" class="nav-item logout">
+                    <span class="nav-icon">🚪</span>
+                    <span class="nav-text">Logout</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Bar -->
+            <div class="top-bar">
+                <div class="hamburger-mobile">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <div class="top-bar-right">
+                    <button class="btn-icon-small" onclick="toggleDarkMode()" title="Toggle Dark Mode">🌙</button>
+                    <button class="btn-icon-small" onclick="alert('Notifications coming soon!')" title="Notifications">🔔</button>
+                </div>
+            </div>
+
+            <!-- Pages Container -->
+            <div class="pages-container">
+                <!-- Dashboard Page -->
+                <section id="dashboard" class="page active">
+                    <div class="dashboard-content">
+                        <!-- Greeting -->
+                        <div class="greeting-section">
+                            <h1>Good morning, Sushant! 👋</h1>
+                            <p>Wednesday, June 25, 2024 — Here's your daily health summary</p>
+                        </div>
+
+                        <!-- Top Stats -->
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <div class="stat-header">
+                                    <span class="stat-label">Daily Calories</span>
+                                    <span class="stat-icon">🔥</span>
+                                </div>
+                                <div class="stat-value">1,840</div>
+                                <div class="stat-goal">Goal: 2,000 kcal</div>
+                            </div>
+
+                            <div class="stat-card">
+                                <div class="stat-header">
+                                    <span class="stat-label">BMI Score</span>
+                                    <span class="stat-icon">📏</span>
+                                </div>
+                                <div class="stat-value">22.4</div>
+                                <div class="stat-goal">Normal weight range</div>
+                            </div>
+
+                            <div class="stat-card">
+                                <div class="stat-header">
+                                    <span class="stat-label">Water Intake</span>
+                                    <span class="stat-icon">💧</span>
+                                </div>
+                                <div class="stat-value">1.8 L</div>
+                                <div class="stat-goal">Goal: 2.5L today</div>
+                            </div>
+
+                            <div class="stat-card">
+                                <div class="stat-header">
+                                    <span class="stat-label">Streak</span>
+                                    <span class="stat-icon">🔥</span>
+                                </div>
+                                <div class="stat-value">14 days</div>
+                                <div class="stat-goal">Keep it up!</div>
+                            </div>
+                        </div>
+
+                        <!-- Charts Row -->
+                        <div class="charts-row">
+                            <!-- Weekly Calories Chart -->
+                            <div class="chart-card">
+                                <div class="card-header">
+                                    <h2>Weekly Calorie Intake</h2>
+                                    <span class="chart-selector">This Week ▼</span>
+                                </div>
+                                <div class="chart-content">
+                                    <canvas id="weeklyCalorieChart"></canvas>
+                                </div>
+                                <p class="chart-label">Avg: 1864 kcal/day</p>
+                            </div>
+
+                            <!-- Macros Chart -->
+                            <div class="chart-card">
+                                <div class="card-header">
+                                    <h2>Today's Macros</h2>
+                                    <p class="chart-label-small">Distribution by %</p>
+                                </div>
+                                <div class="macro-chart">
+                                    <svg viewBox="0 0 120 120" class="donut-chart">
+                                        <circle cx="60" cy="60" r="50" fill="none" stroke="#51cf66" stroke-width="20" stroke-dasharray="70.65 150.72"></circle>
+                                        <circle cx="60" cy="60" r="50" fill="none" stroke="#4ecdc4" stroke-width="20" stroke-dasharray="45.22 150.72" stroke-dashoffset="-70.65"></circle>
+                                        <circle cx="60" cy="60" r="50" fill="none" stroke="#ff6b6b" stroke-width="20" stroke-dasharray="35.04 150.72" stroke-dashoffset="-115.87"></circle>
+                                    </svg>
+                                    <div class="macro-text">
+                                        <span class="macro-value">45%</span>
+                                        <span class="macro-label">Carbs</span>
+                                    </div>
+                                </div>
+                                <div class="macro-legend">
+                                    <div class="legend-item">
+                                        <span class="legend-color" style="background: #51cf66;"></span>
+                                        <span>Carbs: 45%</span>
+                                    </div>
+                                    <div class="legend-item">
+                                        <span class="legend-color" style="background: #4ecdc4;"></span>
+                                        <span>Protein: 30%</span>
+                                    </div>
+                                    <div class="legend-item">
+                                        <span class="legend-color" style="background: #ff6b6b;"></span>
+                                        <span>Fat: 25%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Nutrition Goals -->
+                        <div class="nutrition-goals">
+                            <h2>Today's Nutrition Goals</h2>
+                            <div class="goals-container">
+                                <div class="goal-item">
+                                    <div class="goal-label">Calories</div>
+                                    <div class="goal-bar">
+                                        <div class="goal-progress" style="width: 92%"></div>
+                                    </div>
+                                    <div class="goal-text">1840 kcal / 2000 kcal</div>
+                                </div>
+
+                                <div class="goal-item">
+                                    <div class="goal-label">Protein</div>
+                                    <div class="goal-bar">
+                                        <div class="goal-progress protein-progress" style="width: 79%"></div>
+                                    </div>
+                                    <div class="goal-text">79g / 90g</div>
+                                </div>
+
+                                <div class="goal-item">
+                                    <div class="goal-label">Carbohydrates</div>
+                                    <div class="goal-bar">
+                                        <div class="goal-progress carbs-progress" style="width: 88%"></div>
+                                    </div>
+                                    <div class="goal-text">220g / 250g</div>
+                                </div>
+
+                                <div class="goal-item">
+                                    <div class="goal-label">Fats</div>
+                                    <div class="goal-bar">
+                                        <div class="goal-progress fat-progress" style="width: 60%"></div>
+                                    </div>
+                                    <div class="goal-text">48g / 85g</div>
+                                </div>
+
+                                <div class="goal-item">
+                                    <div class="goal-label">Fiber</div>
+                                    <div class="goal-bar">
+                                        <div class="goal-progress fiber-progress" style="width: 73%"></div>
+                                    </div>
+                                    <div class="goal-text">22g / 30g</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Recent Scans -->
+                        <div class="recent-scans">
+                            <div class="recent-header">
+                                <h2>Recent Scans</h2>
+                                <a href="#" class="see-all">View all →</a>
+                            </div>
+                            <div class="scans-list">
+                                <div class="scan-item">
+                                    <div class="scan-icon">🥗</div>
+                                    <div class="scan-details">
+                                        <div class="scan-name">Caesar Salad</div>
+                                        <div class="scan-time">Today, 12:30 PM</div>
+                                    </div>
+                                    <div class="scan-calories">
+                                        <div class="calories-value">320 kcal</div>
+                                        <div class="calories-match">94% match</div>
+                                    </div>
+                                </div>
+
+                                <div class="scan-item">
+                                    <div class="scan-icon">🍗</div>
+                                    <div class="scan-details">
+                                        <div class="scan-name">Grilled Chicken</div>
+                                        <div class="scan-time">Today, 7:00 AM</div>
+                                    </div>
+                                    <div class="scan-calories">
+                                        <div class="calories-value">165 kcal</div>
+                                        <div class="calories-match">87% match</div>
+                                    </div>
+                                </div>
+
+                                <div class="scan-item">
+                                    <div class="scan-icon">🥑</div>
+                                    <div class="scan-details">
+                                        <div class="scan-name">Avocado Toast</div>
+                                        <div class="scan-time">Yesterday, 8:15 AM</div>
+                                    </div>
+                                    <div class="scan-calories">
+                                        <div class="calories-value">280 kcal</div>
+                                        <div class="calories-match">91% match</div>
+                                    </div>
+                                </div>
+
+                                <div class="scan-item">
+                                    <div class="scan-icon">🫐</div>
+                                    <div class="scan-details">
+                                        <div class="scan-name">Berry Smoothie</div>
+                                        <div class="scan-time">Yesterday, 5:30 PM</div>
+                                    </div>
+                                    <div class="scan-calories">
+                                        <div class="calories-value">180 kcal</div>
+                                        <div class="calories-match">88% match</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Food Scanner Page -->
+                <section id="scanner" class="page">
+                    <div class="page-header">
+                        <h1>Food Scanner</h1>
+                        <p>Upload an image to analyze food nutrition</p>
+                    </div>
+
+                    <div class="scanner-container">
+                        <div class="upload-section">
+                            <input type="file" id="foodImage" accept="image/*" onchange="analyzeFood()">
+                            <label for="foodImage" class="upload-label">
+                                <span class="upload-icon">📸</span>
+                                <span>Click to upload or drag & drop</span>
+                            </label>
+                        </div>
+
+                        <div id="imagePreview" class="image-preview" style="display: none;">
+                            <img id="previewImg" src="" alt="Food Preview">
+                        </div>
+
+                        <div class="analysis-result" id="analysisResult" style="display: none;">
+                            <div class="result-header">
+                                <h2 id="foodName">Food Name</h2>
+                                <span id="confidence" class="confidence">Confidence: 95%</span>
+                            </div>
+
+                            <div class="nutrition-grid">
+                                <div class="nutrition-item">
+                                    <span class="label">Calories</span>
+                                    <span id="calories" class="value">680</span>
+                                </div>
+                                <div class="nutrition-item">
+                                    <span class="label">Protein</span>
+                                    <span id="protein" class="value">25g</span>
+                                </div>
+                                <div class="nutrition-item">
+                                    <span class="label">Carbs</span>
+                                    <span id="carbs" class="value">72g</span>
+                                </div>
+                                <div class="nutrition-item">
+                                    <span class="label">Fat</span>
+                                    <span id="fat" class="value">30g</span>
+                                </div>
+                            </div>
+
+                            <div class="result-buttons">
+                                <button class="btn btn-primary" onclick="addToMeal()">Add to Today's Meal</button>
+                                <button class="btn btn-secondary" onclick="saveFoodHistory()">Save for Later</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Tools Page -->
+                <section id="tools" class="page">
+                    <div class="page-header">
+                        <h1>Health Tools</h1>
+                        <p>Calculate your health metrics</p>
+                    </div>
+
+                    <div class="tools-grid">
+                        <!-- BMI Calculator -->
+                        <div class="tool-card">
+                            <h2>📏 BMI Calculator</h2>
+                            <form onsubmit="calculateBMI(event)">
+                                <div class="form-group">
+                                    <label for="height">Height (cm)</label>
+                                    <input type="number" id="height" placeholder="170" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="weight">Weight (kg)</label>
+                                    <input type="number" id="weight" placeholder="70" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Calculate BMI</button>
+                            </form>
+                            <div id="bmiResult" class="result-box" style="display: none;">
+                                <p>BMI: <strong id="bmiResultValue">-</strong></p>
+                                <p>Category: <strong id="bmiResultCategory">-</strong></p>
+                                <p id="bmiAdvice"></p>
+                            </div>
+                        </div>
+
+                        <!-- Calorie Calculator -->
+                        <div class="tool-card">
+                            <h2>🔥 Daily Calorie Calculator</h2>
+                            <form onsubmit="calculateCalories(event)">
+                                <div class="form-group">
+                                    <label for="age">Age (years)</label>
+                                    <input type="number" id="age" placeholder="25" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="calorieWeight">Weight (kg)</label>
+                                    <input type="number" id="calorieWeight" placeholder="70" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="calorieHeight">Height (cm)</label>
+                                    <input type="number" id="calorieHeight" placeholder="170" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="gender">Gender</label>
+                                    <select id="gender" required>
+                                        <option value="">Select Gender</option>
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                    </select>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Calculate</button>
+                            </form>
+                            <div id="calorieResult" class="result-box" style="display: none;">
+                                <p>TDEE: <strong id="tdeeValue">-</strong> kcal/day</p>
+                                <p>For Weight Loss: <strong id="lossValue">-</strong> kcal/day</p>
+                                <p>For Weight Gain: <strong id="gainValue">-</strong> kcal/day</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Profile Page -->
+                <section id="profile" class="page">
+                    <div class="page-header">
+                        <h1>My Profile</h1>
+                    </div>
+
+                    <div class="profile-container">
+                        <div class="profile-header">
+                            <div class="profile-avatar">👤</div>
+                            <div class="profile-info">
+                                <h2 id="profileName">Sushant Kumar</h2>
+                                <p id="profileEmail">sushant@example.com</p>
+                                <button class="btn btn-primary" onclick="alert('Edit coming soon!')">Edit Profile</button>
+                            </div>
+                        </div>
+
+                        <div class="profile-grid">
+                            <div class="profile-card">
+                                <h3>Personal Information</h3>
+                                <div class="profile-fields">
+                                    <div class="field">
+                                        <label>Age</label>
+                                        <span>25 years</span>
+                                    </div>
+                                    <div class="field">
+                                        <label>Height</label>
+                                        <span>5'10"</span>
+                                    </div>
+                                    <div class="field">
+                                        <label>Weight</label>
+                                        <span>165 lbs</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="profile-card">
+                                <h3>Health Goals</h3>
+                                <div class="profile-fields">
+                                    <div class="field">
+                                        <label>Primary Goal</label>
+                                        <span>Healthy Lifestyle</span>
+                                    </div>
+                                    <div class="field">
+                                        <label>Diet Preference</label>
+                                        <span>Balanced</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
